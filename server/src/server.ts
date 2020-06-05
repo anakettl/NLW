@@ -14,6 +14,9 @@ const app = express();
 // GET: http://localhost:3333/users = pegar informacoes de um usuario
 // GET: http://localhost:3333/users/5 = pegar informacoes do usuario com id 5
 
+// Request param: parametros que vem na propria rota, obrigatorios
+// Query param: quem determina o nome do parametro é quem faz a requisicao, pode ser um array
+
  const users = [
     'Ana',
     'Paulo',
@@ -22,7 +25,13 @@ const app = express();
 
 app.get('/users', (request, response) => {
     // Listar usuarios
-    return response.json(users);
+
+    const search = String(request.query.search);
+
+    // se tiver search, retorna os usuarios filtrados pelo parametro, se nao tiver retorna todos os usuarios
+    const filteredUsers = search ? users.filter(user => user.includes(search)) : users;
+
+    return response.json(filteredUsers);
 })
 
 app.get('/users/:id', (request, response) => {
