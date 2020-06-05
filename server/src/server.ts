@@ -2,6 +2,8 @@ import express, { response } from 'express';
 
 const app = express();
 
+app.use(express.json());
+
 // Rota: endereco completo da requisicao
 // Recurso: qual entidade estamos acessando no sistema
 
@@ -15,7 +17,8 @@ const app = express();
 // GET: http://localhost:3333/users/5 = pegar informacoes do usuario com id 5
 
 // Request param: parametros que vem na propria rota, obrigatorios
-// Query param: quem determina o nome do parametro é quem faz a requisicao, pode ser um array
+// Query param: quem determina o nome do parametro é quem faz a requisicao, geralmente opcionais para filtros, paginacao
+// Request: 
 
  const users = [
     'Ana',
@@ -25,7 +28,6 @@ const app = express();
 
 app.get('/users', (request, response) => {
     // Listar usuarios
-
     const search = String(request.query.search);
 
     // se tiver search, retorna os usuarios filtrados pelo parametro, se nao tiver retorna todos os usuarios
@@ -45,10 +47,11 @@ app.get('/users/:id', (request, response) => {
 
 app.post('/users', (request, response) => {
     // criar um usuario
+    const data = request.body;
 
     const user = {
-        nome: 'Felipe',
-        email: 'felipe@email.com'
+        nome: data.name,
+        email: data.email
     }
 
     return response.json(user);
