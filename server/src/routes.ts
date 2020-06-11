@@ -1,4 +1,4 @@
-import express, { request, response } from 'express';
+import express from 'express';
 import knex from './database/connection';
 
 const routes = express.Router();
@@ -46,10 +46,10 @@ routes.post('/points', async(request, response) => {
 
   const point_id = insertedIds[0];
 
-  const pointItems = items.map((item_id: Number) => {
+  const pointItems = items.map((item_id: number) => {
     return {
       item_id,
-      point_id
+      point_id,
     };
   });
 
