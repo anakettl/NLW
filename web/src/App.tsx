@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 
 // JSX: Sintaxe de XML no Javascript
 //tsx = typescript + jsx
 
-import Home from './pages/Home';
+import Routes from './routes';
 
 function App() {
 
   return (
-    <Home />
+    <Routes />
   );
 }
 
